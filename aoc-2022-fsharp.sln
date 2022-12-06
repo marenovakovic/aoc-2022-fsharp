@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "aoc-2022-fsharp", "aoc-2022-fsharp.fsproj", "{664911B0-71E2-4E0B-B31B-A2B0F4E7C2B7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{664911B0-71E2-4E0B-B31B-A2B0F4E7C2B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{664911B0-71E2-4E0B-B31B-A2B0F4E7C2B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{664911B0-71E2-4E0B-B31B-A2B0F4E7C2B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{664911B0-71E2-4E0B-B31B-A2B0F4E7C2B7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
