@@ -4,4 +4,4 @@ open NUnit.Framework
 open FsUnit
 
 [<Test>]
-let ``nothing`` () = 1 |> should equal 1
+let nothing () = 1 |> should equal 1
