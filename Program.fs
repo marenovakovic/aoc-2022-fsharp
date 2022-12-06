@@ -2,4 +2,4 @@
 
 "day1/input.txt"
 |> readFile
-|> Seq.iter (fun x -> printfn $"%s{x}")
+|> System.Console.Write
