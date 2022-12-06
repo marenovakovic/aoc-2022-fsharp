@@ -7,7 +7,9 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Compile Include="ReadFile.fs" />
         <Compile Include="day1\Day1Test.fs" />
+        <Content Include="day1\input.txt" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 
