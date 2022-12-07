@@ -1,25 +1,29 @@
 module aoc_2022_fsharp.day1.partOne
 
-let private splitCaloriesList (calories: seq<string>) =
-    calories |> Seq.map (fun s -> s.Split "\n")
+let split (separator: string) (s: string) = s.Split(separator)
+
+let separateElfCalories (input: string) = split "\n\n" input |> Seq.ofArray
+
+let private splitElfCalories (calories: seq<string>) =
+    calories |> Seq.map (split "\n")
 
 let private sumCaloriesPerElf caloriesList =
     caloriesList
-    |> Seq.map (fun calories -> calories |> Array.map int)
-    |> Seq.map Array.sum
+    |> Seq.map (fun calories -> calories |> Seq.map int)
+    |> Seq.map Seq.sum
+
+let private calculateCaloriesPerElf (input: string) =
+    input
+    |> separateElfCalories
+    |> splitElfCalories
+    |> sumCaloriesPerElf
 
 let partOne (input: string) =
-    input.Split "\n\n"
-    |> Seq.ofArray
-    |> splitCaloriesList
-    |> sumCaloriesPerElf
-    |> Seq.max
+    input |> calculateCaloriesPerElf |> Seq.max
 
 let partTwo (input: string) =
-    input.Split "\n\n"
-    |> Seq.ofArray
-    |> splitCaloriesList
-    |> sumCaloriesPerElf
+    input
+    |> calculateCaloriesPerElf
     |> Seq.sortDescending
     |> Seq.take 3
     |> Seq.sum
