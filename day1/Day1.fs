@@ -1,4 +1,4 @@
-module aoc_2022_fsharp.day1
+module aoc_2022_fsharp.day1.Day1
 
 let split (separator: string) (s: string) = s.Split(separator)
 

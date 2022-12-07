@@ -2,7 +2,7 @@ module aoc_2022_fsharp.day1.Day1Test
 
 open NUnit.Framework
 open FsUnit
-open aoc_2022_fsharp.day1
+open aoc_2022_fsharp.day1.Day1
 open aoc_2022_fsharp.ReadFile
 
 [<Test>]
