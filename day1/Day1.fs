@@ -14,3 +14,12 @@ let partOne (input: string) =
     |> splitCaloriesList
     |> sumCaloriesPerElf
     |> Seq.max
+
+let partTwo (input: string) =
+    input.Split "\n\n"
+    |> Seq.ofArray
+    |> splitCaloriesList
+    |> sumCaloriesPerElf
+    |> Seq.sortDescending
+    |> Seq.take 3
+    |> Seq.sum
