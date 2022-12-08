@@ -12,23 +12,23 @@ let ``parses input`` () =
 
 [<Test>]
 let ``score Rock Raper`` () =
-    [ (Rock, Paper) ] |> scoreStrategy |> should equal 8
+    [ (Rock, Paper) ] |> scoreRounds |> should equal 8
 
 [<Test>]
 let ``score Rock Rock`` () =
-    [ (Rock, Rock) ] |> scoreStrategy |> should equal 4
+    [ (Rock, Rock) ] |> scoreRounds |> should equal 4
 
 [<Test>]
 let ``score Rock Scissors`` () =
-    [ (Rock, Scissors) ] |> scoreStrategy |> should equal 3
+    [ (Rock, Scissors) ] |> scoreRounds |> should equal 3
 
 [<Test>]
 let ``score Paper Scissors`` () =
-    [ (Paper, Scissors) ] |> scoreStrategy |> should equal 9
+    [ (Paper, Scissors) ] |> scoreRounds |> should equal 9
 
 [<Test>]
 let ``score two turns`` () =
-    [ (Rock, Paper); (Paper, Scissors) ] |> scoreStrategy |> should equal 17
+    [ (Rock, Paper); (Paper, Scissors) ] |> scoreRounds |> should equal 17
 
 [<Test>]
 let ``score assumed test game`` () =
@@ -48,12 +48,11 @@ let ``choose Rock for Rock Draw`` () =
 
 [<Test>]
 let ``choose Scissors for Rock Lose`` () =
-    chooseResponse (Rock, Lose) |> should equal Scissors
+    chooseResponse (Rock, Loss) |> should equal Scissors
 
 [<Test>]
 let ``choose Rock for Paper Lose`` () =
-    chooseResponse (Paper, Lose) |> should equal Rock
-
-[<Test>]
-let ``score actual test game`` () =
-    "day2/test_input.txt" |> readActualStrategy |> scoreStrategy |> should equal 12
+    chooseResponse (Paper, Loss) |> should equal Rock
+// [<Test>]
+// let ``score actual test game`` () =
+//     "day2/test_input.txt" |> readActualStrategy |> scoreRounds |> should equal 12

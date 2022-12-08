@@ -7,63 +7,81 @@ type Play =
     | Rock
     | Paper
     | Scissors
+
+let private parsePlay play =
+    match play with
+    | "A" -> Rock
+    | "B" -> Paper
+    | "C" -> Scissors
+    | "X" -> Rock
+    | "Y" -> Paper
+    | "Z" -> Scissors
+    | _ -> failwith $"invalid play: {play}"
+
+type Result =
     | Win
-    | Lose
+    | Loss
     | Draw
 
-let private assumedTranslation =
-    Map [ "A", Rock; "B", Paper; "C", Scissors; "X", Rock; "Y", Paper; "Z", Scissors ]
+let parseResult result =
+    match result with
+    | "X" -> Loss
+    | "Y" -> Draw
+    | "Z" -> Win
+    | _ -> failwith $"invalid result: {result}"
 
-let private actualTranslation =
-    Map [ "A", Rock; "B", Paper; "C", Scissors; "X", Lose; "Y", Draw; "Z", Win ]
+let private parseRound (round: string list) =
+    (parsePlay round[0], parsePlay round[1])
 
-let private wins = [ (Rock, Paper); (Paper, Scissors); (Scissors, Rock) ]
+let private isWin (opponent, player) =
+    match (player, opponent) with
+    | Rock, Scissors -> Win
+    | Paper, Rock -> Win
+    | Scissors, Paper -> Win
+    | x, y -> if x = y then Draw else Loss
 
-let private loses = [ (Paper, Rock); (Scissors, Paper); (Rock, Scissors) ]
+let private scorePlay (_, player) =
+    match player with
+    | Rock -> 1
+    | Paper -> 2
+    | Scissors -> 3
 
-let private winResponses = Map [ Rock, Paper; Paper, Scissors; Scissors, Rock ]
+let private scoreResult x =
+    match x with
+    | Win -> 6
+    | Draw -> 3
+    | Loss -> 0
 
-let private loseResponses = Map [ Rock, Scissors; Paper, Rock; Scissors, Paper ]
-
-let private score = Map [ Rock, 1; Paper, 2; Scissors, 3 ]
+let chooseResponse round =
+    match round with
+    | x, Draw -> x
+    | Rock, Win -> Paper
+    | Paper, Win -> Scissors
+    | Scissors, Win -> Rock
+    | Rock, Loss -> Scissors
+    | Paper, Loss -> Rock
+    | Scissors, Loss -> Paper
 
 let private parseStrategy strategy =
     strategy |> split "\n" |> List.map (split " ")
 
-let private mapRounds (translation: Map<string, Play>) rounds =
-    rounds
-    |> List.map (fun round ->
-        match round with
-        | opponent :: player :: _ -> translation[opponent], translation[player]
-        | _ -> failwith $"invalid round: {round}")
-
 let private scoreRound round =
-    let _, player = round
+    (isWin round |> scoreResult) + (scorePlay round)
 
-    if List.contains round wins then 6 + score[player]
-    elif List.contains round loses then score[player]
-    else 3 + score[player]
-
-let scoreStrategy (strategy: (Play * Play) list) =
-    List.fold (fun acc round -> acc + scoreRound round) 0 strategy
+let scoreRounds (rounds: (Play * Play) list) =
+    List.fold (fun acc round -> acc + scoreRound round) 0 rounds
 
 let readAssumedStrategy fileName =
-    fileName |> readFile |> parseStrategy |> mapRounds assumedTranslation
+    fileName
+    |> readFile
+    |> parseStrategy
+    |> List.map parseRound
 
 let playAssumedStrategy fileName =
-    fileName |> readAssumedStrategy |> scoreStrategy
+    fileName |> readAssumedStrategy |> scoreRounds
 
-let readActualStrategy fileName =
-    fileName |> readFile |> parseStrategy |> mapRounds actualTranslation
-
-let playActualStrategy fileName =
-    fileName |> readActualStrategy |> scoreStrategy
-
-let chooseResponse round =
-    let opponent, outcome = round
-
-    match outcome with
-    | Win -> winResponses[opponent]
-    | Lose -> loseResponses[opponent]
-    | Draw -> opponent
-    | _ -> failwith $"not an outcome: {outcome}"
+// let readActualStrategy fileName =
+//     fileName |> readFile |> parseStrategy |> mapRounds actualTranslation
+//
+// let playActualStrategy fileName =
+//     fileName |> readActualStrategy |> scoreRounds
