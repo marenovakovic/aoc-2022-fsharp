@@ -33,14 +33,8 @@ let ``should score two turns`` () =
 
 [<Test>]
 let ``should score test game`` () =
-    "day2/test_input.txt"
-    |> readStrategy
-    |> scoreStrategy
-    |> should equal 15
+    "day2/test_input.txt" |> readStrategy |> scoreStrategy |> should equal 15
 
 [<Test>]
 let ``should score actual game (part one)`` () =
-    "day2/input.txt"
-    |> readStrategy
-    |> scoreStrategy
-    |> should equal 12458
+    "day2/input.txt" |> readStrategy |> scoreStrategy |> should equal 12458

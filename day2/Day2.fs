@@ -37,7 +37,8 @@ let private scoreRound round =
     elif loses |> List.contains round then score[player]
     else 3 + score[player]
 
-let readStrategy fileName = fileName |> readFile |> parseRounds |> mapRounds
+let readStrategy fileName =
+    fileName |> readFile |> parseRounds |> mapRounds
 
 let scoreStrategy (strategy: (Play * Play) list) =
     List.fold (fun acc round -> acc + scoreRound round) 0 strategy
