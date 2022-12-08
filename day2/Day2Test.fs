@@ -3,7 +3,6 @@ module aoc_2022_fsharp.day2.Day2Test
 open NUnit.Framework
 open FsUnit
 open aoc_2022_fsharp.day2.Day2
-open aoc_2022_fsharp.ReadFile
 
 [<Test>]
 let ``should parses input`` () =
