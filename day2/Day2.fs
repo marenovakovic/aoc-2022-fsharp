@@ -33,7 +33,7 @@ let parseResult result =
 let private parseRound (round: string list) =
     (parsePlay round[0], parsePlay round[1])
 
-let private isWin (opponent, player) =
+let private calculateResult (opponent, player) =
     match (player, opponent) with
     | Rock, Scissors -> Win
     | Paper, Rock -> Win
@@ -66,7 +66,7 @@ let private parseStrategy strategy =
     strategy |> split "\n" |> List.map (split " ")
 
 let private scoreRound round =
-    (isWin round |> scoreResult) + (scorePlay round)
+    (calculateResult round |> scoreResult) + (scorePlay round)
 
 let scoreRounds (rounds: (Play * Play) list) =
     List.fold (fun acc round -> acc + scoreRound round) 0 rounds
