@@ -30,8 +30,6 @@ let private mapTurns turns =
         | opponent :: player :: _ -> translation[opponent], translation[player]
         | _ -> raise IllegalState)
 
-let parseStrategy strategy = strategy |> parseTurns |> mapTurns
-
 let private scoreTurn turn =
     let _, player = turn
 
@@ -39,10 +37,15 @@ let private scoreTurn turn =
     elif loses |> List.contains turn then score[player]
     else 3 + score[player]
 
-let scoreStrategy (strategy: (Play * Play) list) =
-    let rec loop score turns =
-        match turns with
-        | turn :: rest -> loop (score + scoreTurn turn) rest
-        | _ -> score
+let parseStrategy strategy = strategy |> parseTurns |> mapTurns
 
-    loop 0 strategy
+let scoreStrategy (strategy: (Play * Play) list) =
+    List.fold (fun acc turn -> acc + scoreTurn turn) 0 strategy
+
+// let scoreStrategy (strategy: (Play * Play) list) =
+//     let rec loop score turns =
+//         match turns with
+//         | turn :: rest -> loop (score + scoreTurn turn) rest
+//         | _ -> score
+//
+//     loop 0 strategy
