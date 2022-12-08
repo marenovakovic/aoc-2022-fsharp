@@ -1,6 +1,5 @@
 module aoc_2022_fsharp.day2.Day2
 
-open System
 open aoc_2022_fsharp.ReadFile
 open aoc_2022_fsharp.Split
 
@@ -33,8 +32,8 @@ let private mapRounds rounds =
 let private scoreRound round =
     let _, player = round
 
-    if wins |> List.contains round then 6 + score[player]
-    elif loses |> List.contains round then score[player]
+    if List.contains round wins then 6 + score[player]
+    elif List.contains round loses then score[player]
     else 3 + score[player]
 
 let readStrategy fileName =
