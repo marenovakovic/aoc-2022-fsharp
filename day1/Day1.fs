@@ -1,11 +1,10 @@
 module aoc_2022_fsharp.day1.Day1
 
-let split (separator: string) (s: string) = s.Split(separator)
+open aoc_2022_fsharp.Split
 
 let separateElfCalories (input: string) = split "\n\n" input |> Seq.ofArray
 
-let private splitElfCalories (calories: seq<string>) =
-    calories |> Seq.map (split "\n")
+let private splitElfCalories (calories: seq<string>) = calories |> Seq.map (split "\n")
 
 let private sumCaloriesPerElf caloriesList =
     caloriesList
@@ -13,17 +12,10 @@ let private sumCaloriesPerElf caloriesList =
     |> Seq.map Seq.sum
 
 let private calculateCaloriesPerElf (input: string) =
-    input
-    |> separateElfCalories
-    |> splitElfCalories
-    |> sumCaloriesPerElf
+    input |> separateElfCalories |> splitElfCalories |> sumCaloriesPerElf
 
 let findMaxCalories (input: string) =
     input |> calculateCaloriesPerElf |> Seq.max
 
 let findMaxCaloriesForTopThreeElves (input: string) =
-    input
-    |> calculateCaloriesPerElf
-    |> Seq.sortDescending
-    |> Seq.take 3
-    |> Seq.sum
+    input |> calculateCaloriesPerElf |> Seq.sortDescending |> Seq.take 3 |> Seq.sum

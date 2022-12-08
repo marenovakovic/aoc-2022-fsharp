@@ -7,11 +7,16 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Compile Include="Split.fs" />
         <Compile Include="ReadFile.fs" />
         <Compile Include="day1\Day1.fs" />
         <Compile Include="day1\Day1Test.fs" />
         <Content Include="day1\input.txt" />
         <Content Include="day1\test_input.txt" />
+        <Compile Include="day2\Day2.fs" />
+        <Compile Include="day2\Day2Test.fs" />
+        <Content Include="day2\input.txt" />
+        <Content Include="day2\test_input.txt" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 
