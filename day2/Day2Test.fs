@@ -5,35 +5,35 @@ open FsUnit
 open aoc_2022_fsharp.day2.Day2
 
 [<Test>]
-let ``should parses input`` () =
+let ``parses input`` () =
     "day2/test_input.txt"
     |> readAssumedStrategy
     |> should equal [ (Rock, Paper); (Paper, Rock); (Scissors, Scissors) ]
 
 [<Test>]
-let ``should score rock paper`` () =
+let ``score Rock Raper`` () =
     [ (Rock, Paper) ] |> scoreStrategy |> should equal 8
 
 [<Test>]
-let ``should score rock rock`` () =
+let ``score Rock Rock`` () =
     [ (Rock, Rock) ] |> scoreStrategy |> should equal 4
 
 [<Test>]
-let ``should score rock scissors`` () =
+let ``score Rock Scissors`` () =
     [ (Rock, Scissors) ] |> scoreStrategy |> should equal 3
 
 [<Test>]
-let ``should score paper scissors`` () =
+let ``score Paper Scissors`` () =
     [ (Paper, Scissors) ] |> scoreStrategy |> should equal 9
 
 [<Test>]
-let ``should score two turns`` () =
+let ``score two turns`` () =
     [ (Rock, Paper); (Paper, Scissors) ] |> scoreStrategy |> should equal 17
 
 [<Test>]
-let ``should score test game`` () =
+let ``score test game`` () =
     "day2/test_input.txt" |> readAssumedStrategy |> scoreStrategy |> should equal 15
 
 [<Test>]
-let ``should score actual game (part one)`` () =
+let ``score assumed game (part one)`` () =
     "day2/input.txt" |> readAssumedStrategy |> scoreStrategy |> should equal 12458
