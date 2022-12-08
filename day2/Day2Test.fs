@@ -37,3 +37,9 @@ let ``score test game`` () =
 [<Test>]
 let ``score assumed game (part one)`` () =
     "day2/input.txt" |> readAssumedStrategy |> scoreStrategy |> should equal 12458
+
+[<Test>]
+let ``choose Paper for Rock Win`` () =
+    chooseOutcome (Rock, Win) |> should equal Rock
+
+

@@ -47,3 +47,8 @@ let readAssumedStrategy fileName =
 
 let scoreStrategy (strategy: (Play * Play) list) =
     List.fold (fun acc round -> acc + scoreRound round) 0 strategy
+
+let readActualStrategy fileName =
+    fileName |> readFile |> parseStrategy |> mapRounds actualTranslation
+
+let chooseOutcome round = Rock
