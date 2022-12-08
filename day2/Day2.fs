@@ -11,7 +11,7 @@ type Play =
     | Paper
     | Scissors
 
-let private translation =
+let private assumedTranslation =
     Map [ "A", Rock; "B", Paper; "C", Scissors; "X", Rock; "Y", Paper; "Z", Scissors ]
 
 let private wins = [ (Rock, Paper); (Paper, Scissors); (Scissors, Rock) ]
@@ -27,7 +27,7 @@ let private mapRounds rounds =
     rounds
     |> List.map (fun round ->
         match round with
-        | opponent :: player :: _ -> translation[opponent], translation[player]
+        | opponent :: player :: _ -> assumedTranslation[opponent], assumedTranslation[player]
         | _ -> raise IllegalState)
 
 let private scoreRound round =
@@ -37,7 +37,7 @@ let private scoreRound round =
     elif loses |> List.contains round then score[player]
     else 3 + score[player]
 
-let parseStrategy strategy = strategy |> parseRounds |> mapRounds
+let readStrategy fileName = fileName |> readFile |> parseRounds |> mapRounds
 
 let scoreStrategy (strategy: (Play * Play) list) =
     List.fold (fun acc round -> acc + scoreRound round) 0 strategy

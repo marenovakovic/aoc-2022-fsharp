@@ -8,8 +8,7 @@ open aoc_2022_fsharp.ReadFile
 [<Test>]
 let ``should parses input`` () =
     "day2/test_input.txt"
-    |> readFile
-    |> parseStrategy
+    |> readStrategy
     |> should equal [ (Rock, Paper); (Paper, Rock); (Scissors, Scissors) ]
 
 [<Test>]
@@ -35,15 +34,13 @@ let ``should score two turns`` () =
 [<Test>]
 let ``should score test game`` () =
     "day2/test_input.txt"
-    |> readFile
-    |> parseStrategy
+    |> readStrategy
     |> scoreStrategy
     |> should equal 15
 
 [<Test>]
 let ``should score actual game (part one)`` () =
     "day2/input.txt"
-    |> readFile
-    |> parseStrategy
+    |> readStrategy
     |> scoreStrategy
     |> should equal 12458
