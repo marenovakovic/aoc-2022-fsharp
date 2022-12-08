@@ -7,7 +7,7 @@ open aoc_2022_fsharp.day2.Day2
 [<Test>]
 let ``should parses input`` () =
     "day2/test_input.txt"
-    |> readStrategy
+    |> readAssumedStrategy
     |> should equal [ (Rock, Paper); (Paper, Rock); (Scissors, Scissors) ]
 
 [<Test>]
@@ -32,8 +32,8 @@ let ``should score two turns`` () =
 
 [<Test>]
 let ``should score test game`` () =
-    "day2/test_input.txt" |> readStrategy |> scoreStrategy |> should equal 15
+    "day2/test_input.txt" |> readAssumedStrategy |> scoreStrategy |> should equal 15
 
 [<Test>]
 let ``should score actual game (part one)`` () =
-    "day2/input.txt" |> readStrategy |> scoreStrategy |> should equal 12458
+    "day2/input.txt" |> readAssumedStrategy |> scoreStrategy |> should equal 12458

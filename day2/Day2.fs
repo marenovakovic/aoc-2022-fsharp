@@ -42,7 +42,7 @@ let private scoreRound round =
     elif List.contains round loses then score[player]
     else 3 + score[player]
 
-let readStrategy fileName =
+let readAssumedStrategy fileName =
     fileName |> readFile |> parseStrategy |> mapRounds assumedTranslation
 
 let scoreStrategy (strategy: (Play * Play) list) =
