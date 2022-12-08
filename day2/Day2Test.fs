@@ -31,15 +31,29 @@ let ``score two turns`` () =
     [ (Rock, Paper); (Paper, Scissors) ] |> scoreStrategy |> should equal 17
 
 [<Test>]
-let ``score test game`` () =
-    "day2/test_input.txt" |> readAssumedStrategy |> scoreStrategy |> should equal 15
+let ``score assumed test game`` () =
+    "day2/test_input.txt" |> playAssumedStrategy |> should equal 15
 
 [<Test>]
 let ``score assumed game (part one)`` () =
-    "day2/input.txt" |> readAssumedStrategy |> scoreStrategy |> should equal 12458
+    "day2/input.txt" |> playAssumedStrategy |> should equal 12458
 
 [<Test>]
 let ``choose Paper for Rock Win`` () =
-    chooseOutcome (Rock, Win) |> should equal Rock
+    chooseResponse (Rock, Win) |> should equal Paper
 
+[<Test>]
+let ``choose Rock for Rock Draw`` () =
+    chooseResponse (Rock, Draw) |> should equal Rock
 
+[<Test>]
+let ``choose Scissors for Rock Lose`` () =
+    chooseResponse (Rock, Lose) |> should equal Scissors
+
+[<Test>]
+let ``choose Rock for Paper Lose`` () =
+    chooseResponse (Paper, Lose) |> should equal Rock
+
+[<Test>]
+let ``score actual test game`` () =
+    "day2/test_input.txt" |> readActualStrategy |> scoreStrategy |> should equal 12
