@@ -18,10 +18,10 @@ let private calculateCaloriesPerElf (input: string) =
     |> splitElfCalories
     |> sumCaloriesPerElf
 
-let partOne (input: string) =
+let findMaxCalories (input: string) =
     input |> calculateCaloriesPerElf |> Seq.max
 
-let partTwo (input: string) =
+let findMaxCaloriesForTopThreeElves (input: string) =
     input
     |> calculateCaloriesPerElf
     |> Seq.sortDescending
