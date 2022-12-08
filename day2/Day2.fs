@@ -20,32 +20,24 @@ let private loses = [ (Paper, Rock); (Scissors, Paper); (Rock, Scissors) ]
 
 let private score = Map [ Rock, 1; Paper, 2; Scissors, 3 ]
 
-let private parseTurns strategy =
+let private parseRounds strategy =
     strategy |> split "\n" |> List.map (split " ")
 
-let private mapTurns turns =
-    turns
-    |> List.map (fun turn ->
-        match turn with
+let private mapRounds rounds =
+    rounds
+    |> List.map (fun round ->
+        match round with
         | opponent :: player :: _ -> translation[opponent], translation[player]
         | _ -> raise IllegalState)
 
-let private scoreTurn turn =
-    let _, player = turn
+let private scoreRound round =
+    let _, player = round
 
-    if wins |> List.contains turn then 6 + score[player]
-    elif loses |> List.contains turn then score[player]
+    if wins |> List.contains round then 6 + score[player]
+    elif loses |> List.contains round then score[player]
     else 3 + score[player]
 
-let parseStrategy strategy = strategy |> parseTurns |> mapTurns
+let parseStrategy strategy = strategy |> parseRounds |> mapRounds
 
 let scoreStrategy (strategy: (Play * Play) list) =
-    List.fold (fun acc turn -> acc + scoreTurn turn) 0 strategy
-
-// let scoreStrategy (strategy: (Play * Play) list) =
-//     let rec loop score turns =
-//         match turns with
-//         | turn :: rest -> loop (score + scoreTurn turn) rest
-//         | _ -> score
-//
-//     loop 0 strategy
+    List.fold (fun acc round -> acc + scoreRound round) 0 strategy
