@@ -84,8 +84,5 @@ let playAssumedStrategy fileName =
 let readActualStrategy fileName =
     fileName |> readFile |> parseStrategy |> List.map parseActualRound
 
-let singleRoundScore round =
-    (calculateResult round |> scoreResult) + (scorePlay round)
-
 let playActualStrategy fileName =
     fileName |> readActualStrategy |> List.map chooseResponse |> scoreRounds
