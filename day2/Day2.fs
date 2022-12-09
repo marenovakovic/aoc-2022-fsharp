@@ -59,8 +59,8 @@ let chooseResponse round =
     | Paper, Loss -> (Paper, Rock)
     | Scissors, Loss -> (Scissors, Paper)
 
-let private parseStrategy strategy =
-    split "\n" strategy |> List.map (split " ")
+let private parseStrategy translate strategy =
+    split "\n" strategy |> List.map (split " ") |> List.map translate
 
 let private parseAssumedRound (round: string list) =
     (parsePlay round[0], parsePlay round[1])
@@ -75,13 +75,13 @@ let scoreRounds (rounds: (Play * Play) list) =
     List.fold (fun acc round -> acc + scoreRound round) 0 rounds
 
 let readAssumedStrategy fileName =
-    fileName |> readFile |> parseStrategy |> List.map parseAssumedRound
+    fileName |> readFile |> parseStrategy parseAssumedRound
 
 let playAssumedStrategy fileName =
     fileName |> readAssumedStrategy |> scoreRounds
 
 let readActualStrategy fileName =
-    fileName |> readFile |> parseStrategy |> List.map parseActualRound
+    fileName |> readFile |> parseStrategy parseActualRound
 
 let playActualStrategy fileName =
     fileName |> readActualStrategy |> List.map chooseResponse |> scoreRounds
