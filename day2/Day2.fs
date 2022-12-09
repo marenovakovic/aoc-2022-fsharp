@@ -1,6 +1,5 @@
 module aoc_2022_fsharp.day2.Day2
 
-open System
 open aoc_2022_fsharp.ReadFile
 open aoc_2022_fsharp.Split
 
@@ -61,7 +60,7 @@ let chooseResponse round =
     | Scissors, Loss -> (Scissors, Paper)
 
 let private parseStrategy strategy =
-    strategy |> split "\n" |> List.map (split " ")
+    split "\n" strategy |> List.map (split " ")
 
 let private parseAssumedRound (round: string list) =
     (parsePlay round[0], parsePlay round[1])
