@@ -1,5 +1,6 @@
 module aoc_2022_fsharp.day2.Day2
 
+open System
 open aoc_2022_fsharp.ReadFile
 open aoc_2022_fsharp.Split
 
@@ -30,9 +31,6 @@ let parseResult result =
     | "Z" -> Win
     | _ -> failwith $"invalid result: {result}"
 
-let private parseRound (round: string list) =
-    (parsePlay round[0], parsePlay round[1])
-
 let private calculateResult (opponent, player) =
     match (player, opponent) with
     | Rock, Scissors -> Win
@@ -46,24 +44,30 @@ let private scorePlay (_, player) =
     | Paper -> 2
     | Scissors -> 3
 
-let private scoreResult x =
-    match x with
+let private scoreResult result =
+    match result with
     | Win -> 6
     | Draw -> 3
     | Loss -> 0
 
 let chooseResponse round =
     match round with
-    | x, Draw -> x
-    | Rock, Win -> Paper
-    | Paper, Win -> Scissors
-    | Scissors, Win -> Rock
-    | Rock, Loss -> Scissors
-    | Paper, Loss -> Rock
-    | Scissors, Loss -> Paper
+    | x, Draw -> (x, x)
+    | Rock, Win -> (Rock, Paper)
+    | Paper, Win -> (Paper, Scissors)
+    | Scissors, Win -> (Scissors, Rock)
+    | Rock, Loss -> (Rock, Scissors)
+    | Paper, Loss -> (Paper, Rock)
+    | Scissors, Loss -> (Scissors, Paper)
 
 let private parseStrategy strategy =
     strategy |> split "\n" |> List.map (split " ")
+
+let private parseAssumedRound (round: string list) =
+    (parsePlay round[0], parsePlay round[1])
+
+let private parseActualRound (round: string list) =
+    (parsePlay round[0], parseResult round[1])
 
 let private scoreRound round =
     (calculateResult round |> scoreResult) + (scorePlay round)
@@ -72,16 +76,16 @@ let scoreRounds (rounds: (Play * Play) list) =
     List.fold (fun acc round -> acc + scoreRound round) 0 rounds
 
 let readAssumedStrategy fileName =
-    fileName
-    |> readFile
-    |> parseStrategy
-    |> List.map parseRound
+    fileName |> readFile |> parseStrategy |> List.map parseAssumedRound
 
 let playAssumedStrategy fileName =
     fileName |> readAssumedStrategy |> scoreRounds
 
-// let readActualStrategy fileName =
-//     fileName |> readFile |> parseStrategy |> mapRounds actualTranslation
-//
-// let playActualStrategy fileName =
-//     fileName |> readActualStrategy |> scoreRounds
+let readActualStrategy fileName =
+    fileName |> readFile |> parseStrategy |> List.map parseActualRound
+
+let singleRoundScore round =
+    (calculateResult round |> scoreResult) + (scorePlay round)
+
+let playActualStrategy fileName =
+    fileName |> readActualStrategy |> List.map chooseResponse |> scoreRounds

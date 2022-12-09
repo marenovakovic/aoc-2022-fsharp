@@ -40,19 +40,24 @@ let ``score assumed game (part one)`` () =
 
 [<Test>]
 let ``choose Paper for Rock Win`` () =
-    chooseResponse (Rock, Win) |> should equal Paper
+    chooseResponse (Rock, Win) |> should equal (Rock, Paper)
 
 [<Test>]
 let ``choose Rock for Rock Draw`` () =
-    chooseResponse (Rock, Draw) |> should equal Rock
+    chooseResponse (Rock, Draw) |> should equal (Rock, Rock)
 
 [<Test>]
 let ``choose Scissors for Rock Lose`` () =
-    chooseResponse (Rock, Loss) |> should equal Scissors
+    chooseResponse (Rock, Loss) |> should equal (Rock, Scissors)
 
 [<Test>]
 let ``choose Rock for Paper Lose`` () =
-    chooseResponse (Paper, Loss) |> should equal Rock
-// [<Test>]
-// let ``score actual test game`` () =
-//     "day2/test_input.txt" |> readActualStrategy |> scoreRounds |> should equal 12
+    chooseResponse (Paper, Loss) |> should equal (Paper, Rock)
+
+[<Test>]
+let ``score actual test game`` () =
+    "day2/test_input.txt" |> playActualStrategy |> should equal 12
+
+[<Test>]
+let ``score actual game (part two)`` () =
+    "day2/input.txt" |> playActualStrategy |> should equal 12683
