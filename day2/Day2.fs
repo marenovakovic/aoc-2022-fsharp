@@ -59,8 +59,8 @@ let chooseResponse round =
     | Paper, Loss -> (Paper, Rock)
     | Scissors, Loss -> (Scissors, Paper)
 
-let private parseStrategy translate strategy =
-    split "\n" strategy |> List.map (split " ") |> List.map translate
+let private parseStrategy parseRound strategy =
+    split "\n" strategy |> List.map (split " ") |> List.map parseRound
 
 let private parseAssumedRound (round: string list) =
     (parsePlay round[0], parsePlay round[1])
