@@ -72,7 +72,7 @@ let private scoreRound round =
     (calculateResult round |> scoreResult) + (scorePlay round)
 
 let scoreRounds (rounds: (Play * Play) list) =
-    List.fold (fun acc round -> acc + scoreRound round) 0 rounds
+    rounds |> List.map scoreRound |> List.sum
 
 let readAssumedStrategy fileName =
     fileName |> readFile |> parseStrategy parseAssumedRound
