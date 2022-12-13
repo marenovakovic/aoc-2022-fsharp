@@ -71,7 +71,7 @@ let private parseActualRound (round: string list) =
 let private scoreRound round =
     (calculateResult round |> scoreResult) + (scorePlay round)
 
-let scoreRounds (rounds: (Play * Play) list) =
+let scoreRounds rounds =
     rounds |> List.map scoreRound |> List.sum
 
 let readAssumedStrategy fileName =
