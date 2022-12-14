@@ -18,7 +18,7 @@
         <Content Include="day2\input.txt" />
         <Content Include="day2\test_input.txt" />
         <Compile Include="day3\Day3Test.fs" />
-        <Compile Include="day3\Day2.fs" />
+        <Compile Include="day3\Day3.fs" />
         <Content Include="day3\input.txt" />
         <Content Include="day3\test_input.txt" />
         <Compile Include="Program.fs" />
