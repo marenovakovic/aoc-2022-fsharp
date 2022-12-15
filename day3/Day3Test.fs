@@ -11,3 +11,9 @@ let ``parse two chars`` () =
 [<Test>]
 let ``parse four chars`` () =
     "abcd" |> parseRucksack |> should equal ("ab", "cd")
+
+[<Test>]
+let ``find common item`` () =
+    "abac" |> parseRucksack |> findCommonItem |> should equal "a"
+    "abbc" |> parseRucksack |> findCommonItem |> should equal "b"
+    "acbc" |> parseRucksack |> findCommonItem |> should equal "c"
