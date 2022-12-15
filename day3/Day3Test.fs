@@ -5,5 +5,9 @@ open FsUnit
 open Day3
 
 [<Test>]
-let ``can parse two chars`` () =
-    "ab" |> parseRucksack |> should equal [ "a"; "b" ]
+let ``parse two chars`` () =
+    "ab" |> parseRucksack |> should equal ("a", "b")
+
+[<Test>]
+let ``parse four chars`` () =
+    "abcd" |> parseRucksack |> should equal ("ab", "cd")
