@@ -13,7 +13,7 @@ let findCommonItem (rucksack: string * string) =
     let firstHalf = fst rucksack |> Seq.toList
     let secondHalf = snd rucksack |> Seq.toList
     let intersection = Set.intersect (Set.ofList firstHalf) (Set.ofList secondHalf)
-    Set.fold (fun x acc -> acc::x) [] intersection
+    Set.fold (fun x acc -> acc :: x) [] intersection
 
 let priority c =
     match c with
@@ -22,9 +22,11 @@ let priority c =
 
 let prioritizeLine line = List.map priority line |> List.sum
 
+let private readRucksacks fileName = readFile fileName |> split "\n"
+
 let prioritizeTestLine fileName =
-    readFile fileName
-    |> split "\n"
+    fileName
+    |> readRucksacks
     |> List.map parseRucksack
     |> List.map findCommonItem
     |> List.map prioritizeLine
