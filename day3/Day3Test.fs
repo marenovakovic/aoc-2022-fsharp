@@ -30,3 +30,7 @@ let ``line priority`` () =
     prioritizeLine [ 'a'; 'b' ] |> should equal 3
     prioritizeLine [ 'a'; 'b'; 'c' ] |> should equal 6
     prioritizeLine [ 'a'; 'Z' ] |> should equal 53
+
+[<Test>]
+let ``prioritize test line`` () =
+    prioritizeTestLine "day3/test_input.txt" |> should equal 157
