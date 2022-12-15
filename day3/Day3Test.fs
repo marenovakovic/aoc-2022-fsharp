@@ -24,3 +24,9 @@ let ``item priority`` () =
     priority 'A' |> should equal 27
     priority 'z' |> should equal 26
     priority 'Z' |> should equal 52
+
+[<Test>]
+let ``line priority`` () =
+    prioritizeLine [ 'a'; 'b' ] |> should equal 3
+    prioritizeLine [ 'a'; 'b'; 'c' ] |> should equal 6
+    prioritizeLine [ 'a'; 'Z' ] |> should equal 53

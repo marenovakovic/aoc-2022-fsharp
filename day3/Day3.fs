@@ -16,3 +16,6 @@ let priority c =
     match c with
     | c when Char.IsLower c ->  int c - 96
     | c -> int c - 65 + 27
+
+let prioritizeLine line =
+    List.map priority line |> List.sum
