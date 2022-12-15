@@ -1,5 +1,7 @@
 module aoc_2022_fsharp.day3.Day3
 
+open System
+
 let parseRucksack (items: string) =
     let length = String.length items
     let half = length / 2
@@ -9,3 +11,8 @@ let findCommonItem rucksack =
     let firstHalf = fst rucksack |> Seq.toList
     let secondHalf = snd rucksack |> Seq.toList
     Set.intersect (Set.ofList firstHalf) (Set.ofList secondHalf)
+
+let getPriority c =
+    match c with
+    | c when Char.IsLower c ->  int c - 96
+    | c -> int c - 65 + 27
