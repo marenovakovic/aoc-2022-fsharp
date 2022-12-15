@@ -19,8 +19,8 @@ let ``find common item`` () =
     "acbc" |> parseRucksack |> findCommonItem |> should equal "c"
 
 [<Test>]
-let priority () =
-    getPriority 'a' |> should equal 1
-    getPriority 'A' |> should equal 27
-    getPriority 'z' |> should equal 26
-    getPriority 'Z' |> should equal 52
+let ``item priority`` () =
+    priority 'a' |> should equal 1
+    priority 'A' |> should equal 27
+    priority 'z' |> should equal 26
+    priority 'Z' |> should equal 52
