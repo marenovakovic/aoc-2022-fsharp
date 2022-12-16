@@ -38,3 +38,7 @@ let ``prioritize test line`` () =
 [<Test>]
 let ``prioritize actual line`` () =
     prioritizeActualLines |> should equal 8185
+
+[<Test>]
+let ``common item in a group`` () =
+    [ "abc"; "ade"; "afg" ] |> commonItem |> should equal "a"

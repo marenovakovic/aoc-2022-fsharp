@@ -20,6 +20,9 @@ let priority c =
     | c when Char.IsLower c -> int c - 96
     | c -> int c - 65 + 27
 
+let commonItem lines =
+    List.pairwise lines |> List.map findCommonItem |> List.head
+
 let prioritizeLine line = List.map priority line |> List.sum
 
 let private prioritizeLines lines =
