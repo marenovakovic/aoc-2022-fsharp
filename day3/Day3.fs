@@ -44,7 +44,6 @@ let private prioritizeLines lines =
     |> List.map prioritizeLine
     |> List.sum
 
-
 let prioritizeGroup group = group |> commonItem |> prioritizeLine
 
 let private prioritizeGroups groups =
