@@ -10,10 +10,12 @@ let parseRucksack items =
     let half = length / 2
     items[0 .. half - 1], items[half..length]
 
+let private toSet (s1: string, s2: string) =
+    (s1 |> String.toList |> Set.ofList, s2 |> String.toList |> Set.ofList)
+
 let findCommonItem (rucksack: string * string) =
-    let firstHalf = fst rucksack |> Seq.toList
-    let secondHalf = snd rucksack |> Seq.toList
-    let intersection = Set.intersect (Set.ofList firstHalf) (Set.ofList secondHalf)
+    let firstHalf, secondHalf = toSet rucksack
+    let intersection = Set.intersect firstHalf secondHalf
     Set.fold (fun x acc -> acc :: x) [] intersection
 
 let priority c =
