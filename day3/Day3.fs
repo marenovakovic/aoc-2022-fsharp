@@ -40,11 +40,11 @@ let prioritizeLine line =
 
 let private prioritizeLines lines =
     lines
-    |> List.map parseRucksack
-    |> List.map findCommonItem
-    |> List.map String.ofList
-    |> List.map prioritizeLine
-    |> List.sum
+    >> List.map parseRucksack
+    >> List.map findCommonItem
+    >> List.map String.ofList
+    >> List.map prioritizeLine
+    >> List.sum
 
 let prioritizeGroup group = group |> commonItem |> prioritizeLine
 
