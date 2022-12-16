@@ -23,6 +23,10 @@ let priority c =
 let commonItem lines =
     List.pairwise lines |> List.map findCommonItem |> List.head
 
+let splitIntoGroups lines =
+    let groupCount = (List.length lines) / 3
+    List.splitInto groupCount lines
+
 let prioritizeLine line = List.map priority line |> List.sum
 
 let private prioritizeLines lines =
@@ -34,7 +38,7 @@ let private prioritizeLines lines =
 
 let private readRucksacks fileName = readFile fileName |> split "\n"
 
-let private readTestLines = "day3/test_input.txt" |> readRucksacks
+let readTestLines = "day3/test_input.txt" |> readRucksacks
 
 let private readActualLines = "day3/input.txt" |> readRucksacks
 

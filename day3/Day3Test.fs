@@ -32,8 +32,7 @@ let ``line priority`` () =
     prioritizeLine [ 'a'; 'Z' ] |> should equal 53
 
 [<Test>]
-let ``prioritize test line`` () =
-    prioritizeTestLines |> should equal 157
+let ``prioritize test line`` () = prioritizeTestLines |> should equal 157
 
 [<Test>]
 let ``prioritize actual line`` () =
@@ -42,3 +41,49 @@ let ``prioritize actual line`` () =
 [<Test>]
 let ``common item in a group`` () =
     [ "abc"; "ade"; "afg" ] |> commonItem |> should equal "a"
+
+[<Test>]
+let ``split test lines into groups`` () =
+    let groups = readTestLines |> splitIntoGroups
+
+    groups |> should haveLength 2
+
+    groups
+    |> should
+        equal
+        [ [ "vJrwpWtwJgWrhcsFMMfFFhFp"
+            "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL"
+            "PmmdzqPrVvPwwTWBwg" ]
+          [ "wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn"
+            "ttgJtRGJQctTZtZT"
+            "CrZsJsPPZsGzwwsLwLmpwMDw" ] ]
+
+[<Test>]
+let ``split three line groups`` () =
+    let lines =
+        [ "vJrwpWtwJgWrhcsFMMfFFhFp"
+          "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL"
+          "PmmdzqPrVvPwwTWBwg"
+          "wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn"
+          "ttgJtRGJQctTZtZT"
+          "CrZsJsPPZsGzwwsLwLmpwMDw"
+          "wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn"
+          "ttgJtRGJQctTZtZT"
+          "CrZsJsPPZsGzwwsLwLmpwMDw" ]
+
+    let groups = lines |> splitIntoGroups
+
+    groups |> should haveLength 3
+
+    groups
+    |> should
+        equal
+        [ [ "vJrwpWtwJgWrhcsFMMfFFhFp"
+            "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL"
+            "PmmdzqPrVvPwwTWBwg" ]
+          [ "wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn"
+            "ttgJtRGJQctTZtZT"
+            "CrZsJsPPZsGzwwsLwLmpwMDw" ]
+          [ "wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn"
+            "ttgJtRGJQctTZtZT"
+            "CrZsJsPPZsGzwwsLwLmpwMDw" ] ]
