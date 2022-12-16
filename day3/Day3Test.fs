@@ -104,4 +104,5 @@ let ``split three line groups`` () =
 let ``prioritize test groups`` () = prioritizeTestGroups |> should equal 70
 
 [<Test>]
-let ``prioritize actual groups`` () = prioritizeActualGroups |> should equal 2817
+let ``prioritize actual groups`` () =
+    prioritizeActualGroups |> should equal 2817

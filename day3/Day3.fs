@@ -5,7 +5,7 @@ open FSharpPlus
 open aoc_2022_fsharp.Split
 open aoc_2022_fsharp.ReadFile
 
-let parseRucksack (items: string) =
+let parseRucksack items =
     let length = String.length items
     let half = length / 2
     items[0 .. half - 1], items[half..length]
@@ -21,7 +21,7 @@ let priority c =
     | c when Char.IsLower c -> int c - 96
     | c -> int c - 65 + 27
 
-let commonItem (group: string list) =
+let commonItem group =
     group
     |> List.map String.toList
     |> List.map Set.ofList
@@ -29,14 +29,12 @@ let commonItem (group: string list) =
     |> Set.toList
     |> String.ofList
 
-let splitIntoGroups (lines: string list) =
+let splitIntoGroups lines =
     let groupCount = (List.length lines) / 3
     List.splitInto groupCount lines
 
 let prioritizeLine line =
     line |> String.toList |> List.map priority |> List.sum
-
-let prioritizeGroups groups = groups |> commonItem |> prioritizeLine
 
 let private prioritizeLines lines =
     lines
@@ -45,6 +43,12 @@ let private prioritizeLines lines =
     |> List.map String.ofList
     |> List.map prioritizeLine
     |> List.sum
+
+
+let prioritizeGroup group = group |> commonItem |> prioritizeLine
+
+let private prioritizeGroups groups =
+    groups |> splitIntoGroups |> List.map prioritizeGroup |> List.sum
 
 let private readRucksacks fileName = readFile fileName |> split "\n"
 
@@ -56,8 +60,6 @@ let prioritizeTestLines = readTestLines |> prioritizeLines
 
 let prioritizeActualLines = readActualLines |> prioritizeLines
 
-let prioritizeTestGroups =
-    readTestLines |> splitIntoGroups |> List.map prioritizeGroups |> List.sum
+let prioritizeTestGroups = readTestLines |> prioritizeGroups
 
-let prioritizeActualGroups =
-    readActualLines |> splitIntoGroups |> List.map prioritizeGroups |> List.sum
+let prioritizeActualGroups = readActualLines |> prioritizeGroups
