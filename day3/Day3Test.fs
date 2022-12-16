@@ -27,9 +27,9 @@ let ``item priority`` () =
 
 [<Test>]
 let ``line priority`` () =
-    prioritizeLine [ 'a'; 'b' ] |> should equal 3
-    prioritizeLine [ 'a'; 'b'; 'c' ] |> should equal 6
-    prioritizeLine [ 'a'; 'Z' ] |> should equal 53
+    prioritizeLine "ab" |> should equal 3
+    prioritizeLine "abc" |> should equal 6
+    prioritizeLine "aZ" |> should equal 53
 
 [<Test>]
 let ``prioritize test line`` () = prioritizeTestLines |> should equal 157
@@ -41,6 +41,18 @@ let ``prioritize actual line`` () =
 [<Test>]
 let ``common item in a group`` () =
     [ "abc"; "ade"; "afg" ] |> commonItem |> should equal "a"
+
+    [ "vJrwpWtwJgWrhcsFMMfFFhFp"
+      "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL"
+      "PmmdzqPrVvPwwTWBwg" ]
+    |> commonItem
+    |> should equal "r"
+
+    [ "wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn"
+      "ttgJtRGJQctTZtZT"
+      "CrZsJsPPZsGzwwsLwLmpwMDw" ]
+    |> commonItem
+    |> should equal "Z"
 
 [<Test>]
 let ``split test lines into groups`` () =
@@ -87,3 +99,7 @@ let ``split three line groups`` () =
           [ "wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn"
             "ttgJtRGJQctTZtZT"
             "CrZsJsPPZsGzwwsLwLmpwMDw" ] ]
+
+[<Test>]
+let ``prioritize test groups`` () =
+    readTestLines |> splitIntoGroups |> List.map prioritizeGroups |> List.sum |> should equal 70
