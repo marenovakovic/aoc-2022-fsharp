@@ -22,12 +22,19 @@ let priority c =
 
 let prioritizeLine line = List.map priority line |> List.sum
 
-let private readRucksacks fileName = readFile fileName |> split "\n"
-
-let prioritizeTestLine fileName =
-    fileName
-    |> readRucksacks
+let private prioritizeLines lines =
+    lines
     |> List.map parseRucksack
     |> List.map findCommonItem
     |> List.map prioritizeLine
     |> List.sum
+
+let private readRucksacks fileName = readFile fileName |> split "\n"
+
+let private readTestLines = "day3/test_input.txt" |> readRucksacks
+
+let private readActualLines = "day3/input.txt" |> readRucksacks
+
+let prioritizeTestLines = readTestLines |> prioritizeLines
+
+let prioritizeActualLines = readActualLines |> prioritizeLines

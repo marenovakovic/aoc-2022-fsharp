@@ -33,4 +33,8 @@ let ``line priority`` () =
 
 [<Test>]
 let ``prioritize test line`` () =
-    prioritizeTestLine "day3/test_input.txt" |> should equal 157
+    prioritizeTestLines |> should equal 157
+
+[<Test>]
+let ``prioritize actual line`` () =
+    prioritizeActualLines |> should equal 8185
