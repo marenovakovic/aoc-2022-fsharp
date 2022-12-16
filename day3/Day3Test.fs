@@ -101,5 +101,7 @@ let ``split three line groups`` () =
             "CrZsJsPPZsGzwwsLwLmpwMDw" ] ]
 
 [<Test>]
-let ``prioritize test groups`` () =
-    readTestLines |> splitIntoGroups |> List.map prioritizeGroups |> List.sum |> should equal 70
+let ``prioritize test groups`` () = prioritizeTestGroups |> should equal 70
+
+[<Test>]
+let ``prioritize actual groups`` () = prioritizeActualGroups |> should equal 2817

@@ -55,3 +55,9 @@ let private readActualLines = "day3/input.txt" |> readRucksacks
 let prioritizeTestLines = readTestLines |> prioritizeLines
 
 let prioritizeActualLines = readActualLines |> prioritizeLines
+
+let prioritizeTestGroups =
+    readTestLines |> splitIntoGroups |> List.map prioritizeGroups |> List.sum
+
+let prioritizeActualGroups =
+    readActualLines |> splitIntoGroups |> List.map prioritizeGroups |> List.sum
