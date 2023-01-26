@@ -8,3 +8,6 @@ let rangeToSections range =
 
 let lineToAssignment line =
     line |> split "," |> List.map rangeToSections
+
+let pairAssignments lines =
+    lines |> split "\n" |> List.map lineToAssignment
