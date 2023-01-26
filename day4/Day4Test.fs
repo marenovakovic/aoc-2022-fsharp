@@ -25,3 +25,7 @@ let ``find single assignment overlap`` () =
 [<Test>]
 let ``find multiple assignment overlaps`` () =
     [ [ 2; 3; 4 ]; [ 3; 4; 5 ] ] |> findOverlap |> should equal [ 3; 4 ]
+
+[<Test>]
+let ``full overlap`` () =
+    [ [ 2; 3; 4 ]; [ 2; 3; 4 ] ] |> findOverlap |> should equal [ 2; 3; 4 ]
