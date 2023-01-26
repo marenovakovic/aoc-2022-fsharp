@@ -17,3 +17,7 @@ let ``creates list of pair assignments`` () =
     "2-4,4-6\n3-5,6-8"
     |> pairAssignments
     |> should equal [ [ [ 2; 3; 4 ]; [ 4; 5; 6 ] ]; [ [ 3; 4; 5 ]; [ 6; 7; 8 ] ] ]
+
+[<Test>]
+let ``find single assignment overlap`` () =
+    [ [ 2; 3; 4 ]; [ 4; 5; 6 ] ] |> findOverlap |> should equal [ 4 ]

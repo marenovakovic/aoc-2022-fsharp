@@ -11,3 +11,9 @@ let lineToAssignment line =
 
 let pairAssignments lines =
     lines |> split "\n" |> List.map lineToAssignment
+
+let findOverlap (assignments: int list list) =
+    let first = assignments[0]
+    let second = assignments[1]
+
+    Set.intersect (Set.ofList first) (Set.ofList second) |> Set.toList
