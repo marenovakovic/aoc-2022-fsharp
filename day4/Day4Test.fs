@@ -21,3 +21,7 @@ let ``creates list of pair assignments`` () =
 [<Test>]
 let ``find single assignment overlap`` () =
     [ [ 2; 3; 4 ]; [ 4; 5; 6 ] ] |> findOverlap |> should equal [ 4 ]
+
+[<Test>]
+let ``find multiple assignment overlaps`` () =
+    [ [ 2; 3; 4 ]; [ 3; 4; 5 ] ] |> findOverlap |> should equal [ 3; 4 ]
