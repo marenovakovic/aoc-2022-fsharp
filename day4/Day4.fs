@@ -32,3 +32,10 @@ let countFullOverlaps fileName =
     |> pairAssignments
     |> List.filter isFullOverlap
     |> List.length
+
+let countOverlaps fileName =
+    fileName
+    |> readFile
+    |> pairAssignments
+    |> List.filter overlaps
+    |> List.length
