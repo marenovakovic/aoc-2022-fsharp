@@ -33,11 +33,11 @@ let ``full overlap`` () =
     [ [ 1; 2; 3; 4; 5; 6; 7 ]; [ 2; 3; 4 ] ] |> isFullOverlap |> should equal true
 
 [<Test>]
-let ``solves test input`` () =
+let ``solves test input part one`` () =
     "day4/test_input.txt" |> countFullOverlaps |> should equal 2
 
 [<Test>]
-let ``solve actual input`` () =
+let ``solve actual input part one`` () =
     "day4/input.txt" |> countFullOverlaps |> should equal 657
 
 [<Test>]
