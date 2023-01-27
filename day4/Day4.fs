@@ -26,16 +26,9 @@ let isFullOverlap (assignments: int list list) =
 let overlaps (assignments: int list list) =
     assignments |> findOverlap |> List.isEmpty |> not
 
-let countFullOverlaps fileName =
-    fileName
-    |> readFile
-    |> pairAssignments
-    |> List.filter isFullOverlap
-    |> List.length
+let private countAssignments fileName predicate =
+    fileName |> readFile |> pairAssignments |> List.filter predicate |> List.length
 
-let countOverlaps fileName =
-    fileName
-    |> readFile
-    |> pairAssignments
-    |> List.filter overlaps
-    |> List.length
+let countFullOverlaps fileName = countAssignments fileName isFullOverlap
+
+let countOverlaps fileName = countAssignments fileName overlaps
