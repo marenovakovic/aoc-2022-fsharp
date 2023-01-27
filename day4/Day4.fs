@@ -23,6 +23,9 @@ let isFullOverlap (assignments: int list list) =
     let overlap = findOverlap assignments
     assignments |> List.exists (fun x -> x.Length = overlap.Length)
 
+let overlaps (assignments: int list list) =
+    assignments |> findOverlap |> List.isEmpty |> not
+
 let countFullOverlaps fileName =
     fileName
     |> readFile

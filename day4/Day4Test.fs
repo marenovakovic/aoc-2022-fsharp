@@ -39,3 +39,9 @@ let ``solves test input`` () =
 [<Test>]
 let ``solve actual input`` () =
     "day4/input.txt" |> countFullOverlaps |> should equal 657
+
+[<Test>]
+let ``any overlap`` () =
+    [ [ 2; 3; 4 ]; [ 4; 5; 6 ] ] |> overlaps |> should equal true
+    [ [ 2; 3; 4; 5 ]; [ 4; 5; 6; 7; 8 ] ] |> overlaps |> should equal true
+    [ [ 2; 3; 4 ]; [ 5; 6; 7 ] ] |> overlaps |> should equal false
