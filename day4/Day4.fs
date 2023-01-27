@@ -1,5 +1,6 @@
 module aoc_2022_fsharp.day4.Day4
 
+open aoc_2022_fsharp.ReadFile
 open aoc_2022_fsharp.Split
 
 let rangeToSections range =
@@ -17,3 +18,14 @@ let findOverlap (assignments: int list list) =
     let second = assignments[1]
 
     Set.intersect (Set.ofList first) (Set.ofList second) |> Set.toList
+
+let isFullOverlap (assignments: int list list) =
+    let overlap = findOverlap assignments
+    assignments |> List.exists (fun x -> x.Length = overlap.Length)
+
+let countFullOverlaps fileName =
+    fileName
+    |> readFile
+    |> pairAssignments
+    |> List.filter isFullOverlap
+    |> List.length

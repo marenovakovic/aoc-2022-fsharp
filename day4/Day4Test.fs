@@ -28,8 +28,10 @@ let ``find multiple assignment overlaps`` () =
 
 [<Test>]
 let ``full overlap`` () =
-    [ [ 2; 3; 4 ]; [ 2; 3; 4 ] ] |> findOverlap |> should equal [ 2; 3; 4 ]
+    [ [ 2; 3; 4 ]; [ 2; 3; 4 ] ] |> isFullOverlap |> should equal true
+    [ [ 2; 3; 4 ]; [ 1; 2; 3; 4; 5; 6; 7 ] ] |> isFullOverlap |> should equal true
+    [ [ 1; 2; 3; 4; 5; 6; 7 ]; [ 2; 3; 4 ] ] |> isFullOverlap |> should equal true
 
-    [ [ 2; 3; 4 ]; [ 1; 2; 3; 4; 5; 6; 7 ] ]
-    |> findOverlap
-    |> should equal [ 2; 3; 4 ]
+[<Test>]
+let ``solves test input`` () =
+    "day4/test_input.txt" |> countFullOverlaps |> should equal 2
