@@ -29,3 +29,10 @@ move 1 from 2 to 1"""
 [<Test>]
 let ``parse move`` () =
     "move 1 from 2 to 1" |> parseMove |> should equal [ 1; 2; 1 ]
+
+[<Test>]
+let ``parse moves`` () =
+    """move 1 from 2 to 3
+move 3 from 2 to 1"""
+    |> parseMoves
+    |> should equal [ [ 1; 2; 3 ]; [ 3; 2; 1 ] ]

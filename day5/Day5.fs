@@ -21,3 +21,6 @@ let parseMove move =
     |> String.toList
     |> List.map string
     |> List.map int
+
+let parseMoves moves =
+    moves |> split "\n" |> List.map parseMove
