@@ -16,3 +16,12 @@ move 1 from 2 to 1"""
         [ """[A] [B]
  1   2"""
           """move 1 from 2 to 1""" ]
+
+[<Test>]
+let ``get number of stacks from last line of the diagram`` () =
+    """[A] [B] [C]
+ 1   2   3
+
+move 1 from 2 to 1"""
+    |> numberOfStacks
+    |> should equal 3
