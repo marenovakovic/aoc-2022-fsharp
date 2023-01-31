@@ -23,5 +23,5 @@ let ``get number of stacks from last line of the diagram`` () =
  1   2   3
 
 move 1 from 2 to 1"""
-    |> numberOfStacks
+    |> determineNumberOfStacks
     |> should equal 3

@@ -4,10 +4,10 @@ open System
 open FSharpPlus
 open aoc_2022_fsharp.Split
 
-let separateStacksAndMoves (input: string) = input |> split "\n\n"
+let separateStacksAndMoves input = input |> split "\n\n"
 
-let numberOfStacks stacks =
-    stacks
+let determineNumberOfStacks input =
+    input
     |> separateStacksAndMoves
     |> List.head
     |> split "\n"
