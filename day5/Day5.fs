@@ -14,3 +14,10 @@ let determineNumberOfStacks input =
     |> List.last
     |> String.filter Char.IsDigit
     |> String.length
+
+let parseMove move =
+    move
+    |> String.filter Char.IsDigit
+    |> String.toList
+    |> List.map string
+    |> List.map int

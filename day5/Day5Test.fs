@@ -25,3 +25,7 @@ let ``get number of stacks from last line of the diagram`` () =
 move 1 from 2 to 1"""
     |> determineNumberOfStacks
     |> should equal 3
+
+[<Test>]
+let ``parse move`` () =
+    "move 1 from 2 to 1" |> parseMove |> should equal [ 1; 2; 1 ]
