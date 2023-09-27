@@ -43,3 +43,25 @@ let ``parse moves`` () =
     |> String.trimWhiteSpaces
     |> parseMoves
     |> should equal [ [ 1; 2; 3 ]; [ 3; 2; 1 ] ]
+
+[<Test>]
+let ``extract name for single stack`` () =
+    """[A]
+ 1"""
+    |> extractStackNames
+    |> should equal [ "A" ]
+
+[<Test>]
+let ``extract name for two stacks`` () =
+    """[A] [B]
+ 1   1"""
+    |> extractStackNames
+    |> should equal [ "A"; "B" ]
+
+[<Test>]
+let ``extract name for three stacks`` () =
+    """    [A]    
+[A] [B] [C]
+ 1   2   1"""
+    |> extractStackNames
+    |> should equal [ [ " "; "A"; " " ]; [ "A"; "B"; "C" ] ]
