@@ -4,13 +4,13 @@ open FSharpPlus
 
 let private packetMarkerSize = 4
 
-let private findMarkerPosition' parts =
+let private findMarkerPosition' markerSize parts =
     let indexOfWindowWithDistinctCharacters =
-        parts |> Seq.findIndex (fun x -> Array.length x = packetMarkerSize)
+        parts |> Seq.findIndex (fun x -> Array.length x = markerSize)
 
-    indexOfWindowWithDistinctCharacters + packetMarkerSize
+    indexOfWindowWithDistinctCharacters + markerSize
 
 let findMarkerPosition s =
     Seq.windowed packetMarkerSize s
     |> Seq.map Array.distinct
-    |> findMarkerPosition'
+    |> findMarkerPosition' packetMarkerSize
