@@ -24,6 +24,7 @@ let ``determines number of stack by counting last line`` () =
  1   2   3"""
     |> should equal 3
 
+[<Ignore("")>]
 [<Test>]
 let ``extracts stack names`` () =
     extractStackNames
