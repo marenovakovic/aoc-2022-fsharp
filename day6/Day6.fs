@@ -6,10 +6,10 @@ let private packetMarkerSize = 4
 let private messageMarkerSize = 14
 
 let private findIndexOfPartWithAllDistinctCharacters markerSize parts =
-    parts |> Seq.findIndex (fun x -> Array.length x = markerSize)
+    Seq.findIndex (fun x -> Array.length x = markerSize) parts
 
 let private splitSignal markerSize signal =
-    Seq.windowed markerSize signal |> Seq.map Array.distinct
+    (markerSize, signal) ||> Seq.windowed |> Seq.map Array.distinct
 
 let private findMarkerStart markerSize signal =
     (markerSize, signal)
