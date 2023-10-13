@@ -15,7 +15,7 @@ let private findMarkerStart markerSize signal =
     ||> splitSignal
     |> Seq.map Array.distinct
     |> findIndexOfPartWithAllDistinctCharacters markerSize
-    |> (fun x -> x + markerSize)
+    |> ((+) markerSize)
 
 let findPacketStart signal = findMarkerStart packetMarkerSize signal
 
