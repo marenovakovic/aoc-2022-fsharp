@@ -5,19 +5,18 @@ open FSharpPlus
 let private packetMarkerSize = 4
 let private messageMarkerSize = 14
 
+let splitSignal markerSize signal = Seq.windowed markerSize signal
+
 let private findIndexOfPartWithAllDistinctCharacters markerSize parts =
     Seq.findIndex (fun x -> Array.length x = markerSize) parts
-
-let private splitSignal markerSize signal =
-    (markerSize, signal) ||> Seq.windowed |> Seq.map Array.distinct
 
 let private findMarkerStart markerSize signal =
     (markerSize, signal)
     ||> splitSignal
+    |> Seq.map Array.distinct
     |> findIndexOfPartWithAllDistinctCharacters markerSize
     |> (fun x -> x + markerSize)
 
 let findPacketStart signal = findMarkerStart packetMarkerSize signal
 
-let findMessageStart signal =
-    findMarkerStart messageMarkerSize signal
+let findMessageStart signal = findMarkerStart messageMarkerSize signal

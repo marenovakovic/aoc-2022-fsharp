@@ -6,6 +6,11 @@ open NUnit.Framework
 open FsUnit
 
 [<Test>]
+let ``split signal`` () =
+    splitSignal 4 "abcdef"
+    |> should equal [ [| 'a'; 'b'; 'c'; 'd' |]; [| 'b'; 'c'; 'd'; 'e' |]; [| 'c'; 'd'; 'e'; 'f' |] ]
+
+[<Test>]
 let ``find packet marker start for four different characters`` () =
     "abcd" |> findPacketStart |> should equal 4
 
