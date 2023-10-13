@@ -10,7 +10,7 @@ let private findMarkerPosition' markerSize parts =
 
     indexOfWindowWithDistinctCharacters + markerSize
 
-let findMarkerPosition s =
+let findPacketMarkerPosition s =
     Seq.windowed packetMarkerSize s
     |> Seq.map Array.distinct
     |> findMarkerPosition' packetMarkerSize
