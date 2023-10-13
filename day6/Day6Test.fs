@@ -36,4 +36,11 @@ let ``part one real input`` () =
 
 [<Test>]
 let ``part two test input`` () =
-    "day6/test_input.txt" |> readFile |> findMessageMarkerPosition |> should equal 19
+    "day6/test_input.txt"
+    |> readFile
+    |> findMessageMarkerPosition
+    |> should equal 19
+
+[<Test>]
+let ``part two real input`` () =
+    "day6/input.txt" |> readFile |> findMessageMarkerPosition |> should equal 2414
