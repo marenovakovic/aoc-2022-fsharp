@@ -4,7 +4,6 @@ open aoc_2022_fsharp.ReadFile
 open Day6
 open NUnit.Framework
 open FsUnit
-open aoc_2022_fsharp
 
 [<Test>]
 let ``find packet marker start for four different characters`` () =
@@ -36,10 +35,7 @@ let ``part one real input`` () =
 
 [<Test>]
 let ``part two test input`` () =
-    "day6/test_input.txt"
-    |> readFile
-    |> findMessageStart
-    |> should equal 19
+    "day6/test_input.txt" |> readFile |> findMessageStart |> should equal 19
 
 [<Test>]
 let ``part two real input`` () =
