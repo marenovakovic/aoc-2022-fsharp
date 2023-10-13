@@ -11,14 +11,13 @@ let private findIndexOfPartWithAllDistinctCharacters markerSize parts =
 let private splitSignal markerSize signal =
     Seq.windowed markerSize signal |> Seq.map Array.distinct
 
-let private findMarkerPosition markerSize signal =
+let private findMarkerStart markerSize signal =
     (markerSize, signal)
     ||> splitSignal
     |> findIndexOfPartWithAllDistinctCharacters markerSize
     |> (fun x -> x + markerSize)
 
-let findPacketStart signal =
-    findMarkerPosition packetMarkerSize signal
+let findPacketStart signal = findMarkerStart packetMarkerSize signal
 
 let findMessageStart signal =
-    findMarkerPosition messageMarkerSize signal
+    findMarkerStart messageMarkerSize signal

@@ -7,23 +7,23 @@ open FsUnit
 open aoc_2022_fsharp
 
 [<Test>]
-let ``find marker position for four different characters`` () =
+let ``find packet marker start for four different characters`` () =
     "abcd" |> findPacketStart |> should equal 4
 
 [<Test>]
-let ``find marker position for five characters first two of which are the same`` () =
+let ``find packet marker start for five characters first two of which are the same`` () =
     "aabcd" |> findPacketStart |> should equal 5
 
 [<Test>]
-let ``find marker position for six characters first two of which are the same`` () =
+let ``find packet marker start for six characters first two of which are the same`` () =
     "aabcde" |> findPacketStart |> should equal 5
 
 [<Test>]
-let ``find marker position for seven characters first two of which are the same`` () =
+let ``find packet marker start for seven characters first two of which are the same`` () =
     "aabcdef" |> findPacketStart |> should equal 5
 
 [<Test>]
-let ``find marker position for eight characters first four of which are the same`` () =
+let ``find packet marker start for eight characters first four of which are the same`` () =
     "aaaabcde" |> findPacketStart |> should equal 7
 
 [<Test>]
