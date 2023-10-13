@@ -17,8 +17,8 @@ let private findMarkerPosition markerSize signal =
     |> findIndexOfPartWithAllDistinctCharacters markerSize
     |> (fun x -> x + markerSize)
 
-let findPacketMarkerPosition signal =
+let findPacketStart signal =
     findMarkerPosition packetMarkerSize signal
 
-let findMessageMarkerPosition signal =
+let findMessageStart signal =
     findMarkerPosition messageMarkerSize signal
