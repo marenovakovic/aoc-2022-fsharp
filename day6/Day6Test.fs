@@ -33,3 +33,7 @@ let ``part one test input`` () =
 [<Test>]
 let ``part one real input`` () =
     "day6/input.txt" |> readFile |> findPacketMarkerPosition |> should equal 1598
+
+[<Test>]
+let ``part two test input`` () =
+    "day6/test_input.txt" |> readFile |> findMessageMarkerPosition |> should equal 19
