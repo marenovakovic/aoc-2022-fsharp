@@ -11,6 +11,12 @@ let ``split signal`` () =
     |> should equal [ [| 'a'; 'b'; 'c'; 'd' |]; [| 'b'; 'c'; 'd'; 'e' |]; [| 'c'; 'd'; 'e'; 'f' |] ]
 
 [<Test>]
+let ``is distinct`` () =
+    [| "a"; "a"; "a"; "a" |] |> isDistinct |> should equal false
+    [| "a"; "a"; "b"; "c" |] |> isDistinct |> should equal false
+    [| "a"; "b"; "c"; "d" |] |> isDistinct |> should equal true
+
+[<Test>]
 let ``find packet marker start for four different characters`` () =
     "abcd" |> findPacketStart |> should equal 4
 

@@ -7,15 +7,10 @@ let private messageMarkerSize = 14
 
 let splitSignal markerSize signal = Seq.windowed markerSize signal
 
-let private findIndexOfPartWithAllDistinctCharacters markerSize parts =
-    Seq.findIndex (fun x -> Array.length x = markerSize) parts
+let isDistinct array = array |> Array.distinct = array
 
-let private findMarkerStart markerSize signal =
-    (markerSize, signal)
-    ||> splitSignal
-    |> Seq.map Array.distinct
-    |> findIndexOfPartWithAllDistinctCharacters markerSize
-    |> ((+) markerSize)
+let private findMarkerStart markerSize =
+    Seq.windowed markerSize >> Seq.findIndex isDistinct >> ((+) markerSize)
 
 let findPacketStart signal = findMarkerStart packetMarkerSize signal
 
