@@ -1,6 +1,5 @@
 module aoc_2022_fsharp.day7.Day7
 
-open FSharpPlus
 open System
 open aoc_2022_fsharp.Split
 
