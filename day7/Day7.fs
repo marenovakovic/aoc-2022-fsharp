@@ -5,13 +5,15 @@ open System
 open aoc_2022_fsharp.Split
 
 type TerminalLine =
-    | Command of command: string
+    | EnterDirectory of directory: string
+    | ListFiles
     | Directory of name: string
     | File of size: int * name: string
 
 let private determineLine =
     function
-    | "$" :: rest -> Command(rest |> List.head)
+    | "$" :: "cd" :: rest -> EnterDirectory(rest |> List.head)
+    | [ "$"; "ls" ] -> ListFiles
     | "dir" :: [ name ] -> Directory name
     | size :: [ name ] -> File(int size, name)
     | _ -> raise (Exception())
