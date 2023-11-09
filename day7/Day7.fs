@@ -20,11 +20,3 @@ let private determineLine =
     | _ -> raise (Exception())
 
 let parseLine = split " " >> determineLine
-
-let runCommands lines =
-    let rec loop structure lines =
-        match lines with
-        | EnterDirectory directory :: ListFiles :: rest -> loop (Map [ directory, rest ]) rest
-        | _ -> structure
-
-    loop (Map []) lines
