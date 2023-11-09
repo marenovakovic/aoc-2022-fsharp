@@ -6,11 +6,13 @@ open aoc_2022_fsharp.Split
 type TerminalLine =
     | EnterDirectory of directory: string
     | ListFiles
+    | GoToParentDirectory
     | Directory of name: string
     | File of size: int * name: string
 
 let private determineLine =
     function
+    | [ "$"; "cd"; ".." ] -> GoToParentDirectory
     | [ "$"; "cd"; directory ] -> EnterDirectory directory
     | [ "$"; "ls" ] -> ListFiles
     | "dir" :: [ name ] -> Directory name
