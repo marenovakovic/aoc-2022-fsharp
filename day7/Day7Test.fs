@@ -11,3 +11,9 @@ let ``parse line`` () =
     "$ ls" |> parseLine |> should equal ListFiles
     "dir a" |> parseLine |> should equal (Directory "a")
     "123 a" |> parseLine |> should equal (File(123, "a"))
+
+[<Test>]
+let ``single directory files`` () =
+    [ EnterDirectory "/"; ListFiles; Directory "a"; File(123, "b") ]
+    |> runCommands
+    |> should equal (Map [ ("/", [ Directory "a"; File(123, "b") ]) ])
