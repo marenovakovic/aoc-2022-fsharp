@@ -12,7 +12,7 @@ type TerminalLine =
 
 let private determineLine =
     function
-    | "$" :: "cd" :: rest -> EnterDirectory(rest |> List.head)
+    | [ "$"; "cd"; directory ] -> EnterDirectory directory
     | [ "$"; "ls" ] -> ListFiles
     | "dir" :: [ name ] -> Directory name
     | size :: [ name ] -> File(int size, name)
