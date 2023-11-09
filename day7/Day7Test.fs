@@ -6,7 +6,7 @@ open Day7
 
 [<Test>]
 let ``parse line`` () =
-    "$ cd /" |> parseLine |> should equal (TerminalLine.EnterDirectory "/")
-    "$ ls" |> parseLine |> should equal TerminalLine.ListFiles
-    "dir a" |> parseLine |> should equal (TerminalLine.Directory "a")
-    "123 a" |> parseLine |> should equal (TerminalLine.File(123, "a"))
+    "$ cd /" |> parseLine |> should equal (πEnterDirectory "/")
+    "$ ls" |> parseLine |> should equal ListFiles
+    "dir a" |> parseLine |> should equal (Directory "a")
+    "123 a" |> parseLine |> should equal (File(123, "a"))
