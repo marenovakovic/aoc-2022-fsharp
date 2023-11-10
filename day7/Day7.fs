@@ -10,7 +10,7 @@ type TerminalLine =
     | Directory of name: string
     | File of size: int * name: string
 
-let private determineLine =
+let private parseLine' =
     function
     | [ "$"; "cd"; ".." ] -> GoToParentDirectory
     | [ "$"; "cd"; directory ] -> EnterDirectory directory
@@ -19,4 +19,4 @@ let private determineLine =
     | size :: [ name ] -> File(int size, name)
     | _ -> raise (Exception())
 
-let parseLine = split " " >> determineLine
+let parseLine = split " " >> parseLine'
